@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Question, UserAnswer, QuestionType } from '@/lib/types';
 import { isAnswerCorrect } from '@/lib/utils';
 
@@ -10,6 +11,7 @@ interface ResultSummaryProps {
 }
 
 const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, score }) => {
+  const router = useRouter();
   const percentage = Math.round((score / questions.length) * 100);
   
   const getResultMessage = () => {
@@ -37,6 +39,11 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
     const answer = userAnswers.find(a => a.questionId === question.id);
     return answer && isAnswerCorrect(question, answer.selectedOptionIds);
   }).length;
+  
+  const handleRetry = () => {
+    // ページをリロードして新しい問題セットを取得
+    router.reload();
+  };
   
   return (
     <div className="bg-white p-8 rounded-lg shadow-md">
@@ -69,9 +76,9 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
         <Link href="/" className="aws-button-secondary">
           ホームに戻る
         </Link>
-        <Link href="/exam" className="aws-button">
+        <button onClick={handleRetry} className="aws-button">
           もう一度挑戦する
-        </Link>
+        </button>
       </div>
     </div>
   );
