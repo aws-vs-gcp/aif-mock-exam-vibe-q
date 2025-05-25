@@ -2,15 +2,15 @@
 title: "Amazon Transcribeの特徴"
 options:
   - id: "A"
-    text: "テキストから音声への変換"
+    text: "Amazon Polly"
   - id: "B"
-    text: "音声からテキストへの変換"
+    text: "Amazon Transcribe"
   - id: "C"
-    text: "画像内のテキスト認識"
+    text: "Amazon Textract"
   - id: "D"
-    text: "テキストの多言語翻訳"
+    text: "Amazon Translate"
 correctAnswers: ["B"]
-explanation: "Amazon Transcribeは、音声をテキストに変換する自動音声認識（ASR）サービスです。音声ファイルや音声ストリームをテキストに変換し、音声コンテンツを検索可能にしたり、字幕を生成したりすることができます。テキストから音声への変換はAmazon Polly、画像内のテキスト認識はAmazon Textract、テキストの多言語翻訳はAmazon Translateの機能です。"
+explanation: "Amazon Transcribeは、音声をテキストに変換する自動音声認識（ASR）サービスです。音声ファイルや音声ストリームをテキストに変換し、音声コンテンツを検索可能にしたり、字幕を生成したりすることができます。Amazon Pollyはテキストから音声への変換、Amazon Textractは画像内のテキスト認識、Amazon Translateはテキストの多言語翻訳の機能を提供します。"
 type: "SINGLE_CHOICE"
 ---
 
