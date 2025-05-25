@@ -69,7 +69,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
   return (
     <div className="question-card">
-      <h3 className="text-xl font-semibold mb-4">{question.title}</h3>
+      {/* 出題画面ではタイトルを表示しない */}
+      {showResults && (
+        <h3 className="text-xl font-semibold mb-4">{question.title}</h3>
+      )}
       
       <div className="mb-2 text-sm font-medium text-gray-600">
         {isMultipleChoice ? '複数選択問題（正解を2つ選択）' : '単一選択問題（正解を1つ選択）'}
