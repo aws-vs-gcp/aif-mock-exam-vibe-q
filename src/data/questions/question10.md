@@ -12,7 +12,7 @@ options:
   - id: "E"
     text: "画像内の物体を検出して分類する"
 correctAnswers: ["A", "C"]
-explanation: "Amazon Textractは、ドキュメントからテキスト、フォーム、テーブルなどの構造化データを自動的に抽出するサービスです。スキャンした請求書、レシート、ID、パスポートなどからデータを抽出し、処理することができます。音声認識はAmazon Transcribe、テキストの翻訳はAmazon Translate、画像内の物体検出と分類はAmazon Rekognitionの機能です。"
+explanation: "Amazon Textractは、ドキュメントからテキスト、フォーム、テーブルなどの構造化データを自動的に抽出するサービスです。スキャンした請求書、レシート、ID、パスポートなどからデータを抽出し、処理することができます。音声認識はAmazon Transcribe、テキストの翻訳はAmazon Translate、画像内の物体検出と分類はAmazon Rekognitionの機能です。\n\n参考: https://aws.amazon.com/jp/textract/"
 type: "MULTIPLE_CHOICE"
 ---
 

@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "Amazon Translate"
 correctAnswers: ["B"]
-explanation: "Amazon Transcribeは、音声をテキストに変換する自動音声認識（ASR）サービスです。音声ファイルや音声ストリームをテキストに変換し、音声コンテンツを検索可能にしたり、字幕を生成したりすることができます。Amazon Pollyはテキストから音声への変換、Amazon Textractは画像内のテキスト認識、Amazon Translateはテキストの多言語翻訳の機能を提供します。"
+explanation: "Amazon Transcribeは、音声をテキストに変換する自動音声認識（ASR）サービスです。音声ファイルや音声ストリームをテキストに変換し、音声コンテンツを検索可能にしたり、字幕を生成したりすることができます。Amazon Pollyはテキストから音声への変換、Amazon Textractは画像内のテキスト認識、Amazon Translateはテキストの多言語翻訳の機能を提供します。\n\n参考: https://aws.amazon.com/jp/transcribe/"
 type: "SINGLE_CHOICE"
 ---
 

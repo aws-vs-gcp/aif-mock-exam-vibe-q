@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "IoTデバイス管理"
 correctAnswers: ["B"]
-explanation: "Amazon Kendraは、機械学習を活用したエンタープライズ検索サービスです。自然言語処理と高度な検索アルゴリズムを使用して、組織のデータリポジトリ全体から関連情報を検索できます。ブロックチェーンネットワークの管理はAmazon Managed Blockchain、コンテナオーケストレーションはAmazon ECS/EKS、IoTデバイス管理はAWS IoT Coreの機能です。"
+explanation: "Amazon Kendraは、機械学習を活用したエンタープライズ検索サービスです。自然言語処理と高度な検索アルゴリズムを使用して、組織のデータリポジトリ全体から関連情報を検索できます。ブロックチェーンネットワークの管理はAmazon Managed Blockchain、コンテナオーケストレーションはAmazon ECS/EKS、IoTデバイス管理はAWS IoT Coreの機能です。\n\n参考: https://aws.amazon.com/jp/kendra/"
 type: "SINGLE_CHOICE"
 ---
 

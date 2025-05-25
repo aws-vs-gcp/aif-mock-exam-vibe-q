@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "Amazon Translate"
 correctAnswers: ["B"]
-explanation: "Amazon Comprehendは、自然言語処理（NLP）を使用してテキストからインサイトや関係性を抽出するサービスです。感情分析、エンティティ認識、キーフレーズ検出、言語検出、個人情報（PII）の識別などの機能を提供します。Amazon Rekognitionは画像認識と物体検出、Amazon Pollyは音声合成と音声変換、Amazon Translateは機械翻訳と言語変換の機能を提供します。"
+explanation: "Amazon Comprehendは、自然言語処理（NLP）を使用してテキストからインサイトや関係性を抽出するサービスです。感情分析、エンティティ認識、キーフレーズ検出、言語検出、個人情報（PII）の識別などの機能を提供します。Amazon Rekognitionは画像認識と物体検出、Amazon Pollyは音声合成と音声変換、Amazon Translateは機械翻訳と言語変換の機能を提供します。\n\n参考: https://aws.amazon.com/jp/comprehend/"
 type: "SINGLE_CHOICE"
 ---
 

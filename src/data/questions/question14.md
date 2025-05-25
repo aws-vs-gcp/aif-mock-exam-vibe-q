@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "AWS Lambda"
 correctAnswers: ["B"]
-explanation: "Amazon Personalizeは、機械学習を使用してパーソナライズされたレコメンデーションを生成するフルマネージドサービスです。ユーザーの行動、アイテムの属性、人口統計データなどに基づいて、リアルタイムのパーソナライズされたレコメンデーションを提供します。Amazon QuickSightはビジネスインテリジェンスと可視化、Amazon DynamoDBは分散データベース管理、AWS Lambdaはサーバーレスコンピューティングの機能を提供します。"
+explanation: "Amazon Personalizeは、機械学習を使用してパーソナライズされたレコメンデーションを生成するフルマネージドサービスです。ユーザーの行動、アイテムの属性、人口統計データなどに基づいて、リアルタイムのパーソナライズされたレコメンデーションを提供します。Amazon QuickSightはビジネスインテリジェンスと可視化、Amazon DynamoDBは分散データベース管理、AWS Lambdaはサーバーレスコンピューティングの機能を提供します。\n\n参考: https://aws.amazon.com/jp/personalize/"
 type: "SINGLE_CHOICE"
 ---
 

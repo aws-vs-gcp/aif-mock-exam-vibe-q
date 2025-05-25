@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "Amazon Managed Blockchain"
 correctAnswers: ["B"]
-explanation: "Amazon Forecastは、機械学習を使用して時系列データの高精度な予測を生成するフルマネージドサービスです。小売業の需要予測、リソース計画、財務計画、製造計画などのユースケースに適しています。Amazon Rekognition Videoはリアルタイムのビデオ分析、AWS SimSpace Weaverは3Dモデリングとシミュレーション、Amazon Managed Blockchainは分散型ブロックチェーン台帳の機能を提供します。"
+explanation: "Amazon Forecastは、機械学習を使用して時系列データの高精度な予測を生成するフルマネージドサービスです。小売業の需要予測、リソース計画、財務計画、製造計画などのユースケースに適しています。Amazon Rekognition Videoはリアルタイムのビデオ分析、AWS SimSpace Weaverは3Dモデリングとシミュレーション、Amazon Managed Blockchainは分散型ブロックチェーン台帳の機能を提供します。\n\n参考: https://aws.amazon.com/jp/forecast/"
 type: "SINGLE_CHOICE"
 ---
 
