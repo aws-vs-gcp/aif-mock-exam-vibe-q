@@ -187,26 +187,26 @@ function getDummyQuestions(): Question[] {
   return [...singleChoiceQuestions, ...multipleChoiceQuestions];
 }
 
-// 問題をランダムに並び替える
-function shuffleQuestions(questions: Question[]): Question[] {
+// 問題をランダムに並び替えて指定数を選択する
+function selectRandomQuestions(questions: Question[], count: number): Question[] {
   const shuffled = [...questions];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return shuffled;
+  return shuffled.slice(0, count);
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
       // 問題データを読み込む
-      const questions = loadQuestions();
+      const allQuestions = loadQuestions();
       
-      // 問題をランダムに並び替える
-      const shuffledQuestions = shuffleQuestions(questions);
+      // 全問題からランダムに10問を選択
+      const selectedQuestions = selectRandomQuestions(allQuestions, 10);
       
-      res.status(200).json({ questions: shuffledQuestions });
+      res.status(200).json({ questions: selectedQuestions });
     } catch (error) {
       console.error('Error in API handler:', error);
       res.status(200).json({ 

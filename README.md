@@ -1,10 +1,11 @@
 # AWS Certified AI Practitioner 模擬試験アプリ
 
-Next.js で構築された AWS Certified AI Practitioner 向けの模擬試験アプリケーションです。
+Next.jsで構築されたAWS Certified AI Practitioner向けの模擬試験アプリケーションです。
 
 ## 機能
 
-- 10 問の模擬試験問題
+- 15問の問題データからランダムに10問を出題
+- 単一選択問題と複数選択問題の両方に対応
 - ランダムな順序での問題出題
 - 解答選択と採点機能
 - 結果画面での解説と正答率の表示
@@ -38,7 +39,7 @@ npm run start
 
 ## 開発について
 
-このアプリケーションは、Amazon Q（AWS 公式の AI アシスタント）を使用した Vibe Coding で開発されました。Amazon Q は、コード生成、問題解決、AWS 関連の質問への回答など、開発プロセス全体をサポートしました。
+このアプリケーションは、Amazon Q（AWS公式のAIアシスタント）を使用したVibe Codingで開発されました。Amazon Qは、コード生成、問題解決、AWS関連の質問への回答など、開発プロセス全体をサポートしました。
 
 ## ライセンス
 
