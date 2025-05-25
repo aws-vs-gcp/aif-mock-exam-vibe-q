@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Question, UserAnswer, QuestionType } from '@/lib/types';
 import { isAnswerCorrect } from '@/lib/utils';
 
@@ -10,9 +9,40 @@ interface ResultSummaryProps {
   score: number;
 }
 
-const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, score }) => {
-  const router = useRouter();
-  const percentage = Math.round((score / questions.length) * 100);
+const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, score: initialScore }) => {
+  // 実際のスコアを計算
+  const calculateActualScore = () => {
+    let correctCount = 0;
+    
+    questions.forEach(question => {
+      const answer = userAnswers.find(a => a.questionId === question.id);
+      if (!answer) return;
+      
+      if (question.type === QuestionType.SINGLE_CHOICE) {
+        if (
+          answer.selectedOptionIds.length === 1 && 
+          question.correctAnswers.includes(answer.selectedOptionIds[0])
+        ) {
+          correctCount++;
+        }
+      } else if (question.type === QuestionType.MULTIPLE_CHOICE) {
+        const selectedSet = new Set(answer.selectedOptionIds);
+        const correctSet = new Set(question.correctAnswers);
+        
+        if (
+          selectedSet.size === correctSet.size && 
+          [...selectedSet].every(id => correctSet.has(id))
+        ) {
+          correctCount++;
+        }
+      }
+    });
+    
+    return correctCount;
+  };
+  
+  const actualScore = calculateActualScore();
+  const percentage = Math.round((actualScore / questions.length) * 100);
   
   const getResultMessage = () => {
     if (percentage >= 90) {
@@ -42,7 +72,7 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
   
   const handleRetry = () => {
     // ページをリロードして新しい問題セットを取得
-    router.reload();
+    window.location.reload();
   };
   
   return (
@@ -50,7 +80,7 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
       <h2 className="text-2xl font-bold mb-6 text-center">試験結果</h2>
       
       <div className="text-center mb-8">
-        <div className="text-5xl font-bold mb-2 text-aws-orange">{score} / {questions.length}</div>
+        <div className="text-5xl font-bold mb-2 text-aws-orange">{actualScore} / {questions.length}</div>
         <div className="text-2xl font-semibold">{percentage}%</div>
         <p className="mt-4 text-lg">{getResultMessage()}</p>
       </div>
@@ -60,14 +90,14 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
           <h3 className="font-semibold mb-2">単一選択問題</h3>
           <p>{singleChoiceCorrect} / {singleChoiceQuestions.length} 正解</p>
           <p className="text-sm text-gray-600">
-            ({Math.round((singleChoiceCorrect / singleChoiceQuestions.length) * 100) || 0}%)
+            ({Math.round((singleChoiceCorrect / (singleChoiceQuestions.length || 1)) * 100)}%)
           </p>
         </div>
         <div className="bg-gray-50 p-4 rounded">
           <h3 className="font-semibold mb-2">複数選択問題</h3>
           <p>{multipleChoiceCorrect} / {multipleChoiceQuestions.length} 正解</p>
           <p className="text-sm text-gray-600">
-            ({Math.round((multipleChoiceCorrect / multipleChoiceQuestions.length) * 100) || 0}%)
+            ({Math.round((multipleChoiceCorrect / (multipleChoiceQuestions.length || 1)) * 100)}%)
           </p>
         </div>
       </div>

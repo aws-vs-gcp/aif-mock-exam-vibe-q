@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
-import { Question } from '@/lib/types';
+import { Question, QuestionType } from '@/lib/types';
 
 // マークダウンファイルから問題データを読み込む
 function loadQuestions(): Question[] {
@@ -15,13 +15,21 @@ function loadQuestions(): Question[] {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
       
+      // correctAnswersが配列でない場合は配列に変換
+      let correctAnswers = data.correctAnswers || data.correctAnswer;
+      if (!Array.isArray(correctAnswers)) {
+        correctAnswers = [correctAnswers];
+      }
+      
+      // Question インターフェースに合わせて修正
       return {
         id: filename.replace(/\.md$/, ''),
         title: data.title,
         content: content,
         options: data.options,
-        correctAnswer: data.correctAnswer,
-        explanation: data.explanation
+        correctAnswers: correctAnswers,
+        explanation: data.explanation,
+        type: data.type || QuestionType.SINGLE_CHOICE
       };
     });
     
@@ -46,8 +54,9 @@ function getDummyQuestions(): Question[] {
         { id: 'C', text: 'サーバーレスアプリケーションの開発とデプロイ' },
         { id: 'D', text: 'ブロックチェーンネットワークの作成と管理' }
       ],
-      correctAnswer: 'B',
-      explanation: 'AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。'
+      correctAnswers: ['B'],
+      explanation: 'AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。',
+      type: QuestionType.SINGLE_CHOICE
     },
     {
       id: 'question2',
@@ -59,8 +68,9 @@ function getDummyQuestions(): Question[] {
         { id: 'C', text: '画像と動画の分析と認識' },
         { id: 'D', text: '自然言語処理と感情分析' }
       ],
-      correctAnswer: 'C',
-      explanation: 'Amazon Rekognitionは、画像と動画の分析と認識のためのAIサービスです。'
+      correctAnswers: ['C'],
+      explanation: 'Amazon Rekognitionは、画像と動画の分析と認識のためのAIサービスです。',
+      type: QuestionType.SINGLE_CHOICE
     }
   ];
 }
@@ -83,11 +93,14 @@ export async function GET() {
     // 問題をランダムに並び替える
     const shuffledQuestions = shuffleQuestions(questions);
     
-    return NextResponse.json({ questions: shuffledQuestions });
+    // 最初の10問だけを返す
+    const limitedQuestions = shuffledQuestions.slice(0, 10);
+    
+    return NextResponse.json({ questions: limitedQuestions });
   } catch (error) {
     console.error('Error in API route:', error);
     return NextResponse.json(
-      { error: 'Failed to load questions', questions: getDummyQuestions() },
+      { error: 'Failed to load questions', questions: getDummyQuestions().slice(0, 10) },
       { status: 200 }
     );
   }

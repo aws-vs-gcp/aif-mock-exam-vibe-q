@@ -104,6 +104,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             <span className="font-bold">正解: </span>
             {question.correctAnswers.join(', ')}
           </div>
+          <div className="mb-2">
+            <span className="font-bold">あなたの回答: </span>
+            {selectedOptionIds.length > 0 ? selectedOptionIds.join(', ') : '未回答'}
+          </div>
           <h4 className="font-bold mb-2">解説:</h4>
           <ReactMarkdown>{question.explanation}</ReactMarkdown>
         </div>

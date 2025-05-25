@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import QuestionCard from '@/components/QuestionCard';
 import ProgressBar from '@/components/ProgressBar';
 import ResultSummary from '@/components/ResultSummary';
@@ -23,7 +22,6 @@ export default function ExamPage() {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [examCompleted, setExamCompleted] = useState(false);
   const [score, setScore] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -40,21 +38,24 @@ export default function ExamPage() {
     loadQuestions();
   }, []);
 
-  const handleAnswerSelected = (questionId: string, optionId: string) => {
+  const handleAnswerSelected = (questionId: string, optionIds: string[]) => {
     const existingAnswerIndex = userAnswers.findIndex(
       (answer) => answer.questionId === questionId
     );
 
+    let updatedAnswers: UserAnswer[];
+    
     if (existingAnswerIndex !== -1) {
-      const updatedAnswers = [...userAnswers];
+      updatedAnswers = [...userAnswers];
       updatedAnswers[existingAnswerIndex] = {
         questionId,
-        selectedOptionId: optionId,
+        selectedOptionIds: optionIds,
       };
-      setUserAnswers(updatedAnswers);
     } else {
-      setUserAnswers([...userAnswers, { questionId, selectedOptionId: optionId }]);
+      updatedAnswers = [...userAnswers, { questionId, selectedOptionIds: optionIds }];
     }
+    
+    setUserAnswers(updatedAnswers);
   };
 
   const handleNextQuestion = () => {
@@ -70,6 +71,7 @@ export default function ExamPage() {
   };
 
   const handleSubmitExam = () => {
+    // 採点する
     const calculatedScore = calculateScore(questions, userAnswers);
     setScore(calculatedScore);
     setExamCompleted(true);
@@ -79,7 +81,11 @@ export default function ExamPage() {
   const currentAnswer = userAnswers.find(
     (answer) => currentQuestion && answer.questionId === currentQuestion.id
   );
-  const answeredQuestionsCount = userAnswers.length;
+  
+  // 実際に回答した問題の数をカウント
+  const answeredQuestionsCount = questions.filter(q => 
+    userAnswers.some(a => a.questionId === q.id)
+  ).length;
   const allQuestionsAnswered = answeredQuestionsCount === questions.length;
 
   if (loading) {
@@ -101,17 +107,22 @@ export default function ExamPage() {
         />
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-6">解答と解説</h2>
-          {questions.map((question, index) => (
-            <div key={question.id} className="mb-8">
-              <div className="text-sm text-gray-500 mb-2">問題 {index + 1}</div>
-              <QuestionCard
-                question={question}
-                userAnswer={userAnswers.find(a => a.questionId === question.id)}
-                onAnswerSelected={handleAnswerSelected}
-                showResults={true}
-              />
-            </div>
-          ))}
+          {questions.map((question, index) => {
+            // 各問題に対する回答を探す
+            const answer = userAnswers.find(a => a.questionId === question.id);
+            
+            return (
+              <div key={question.id} className="mb-8">
+                <div className="text-sm text-gray-500 mb-2">問題 {index + 1}</div>
+                <QuestionCard
+                  question={question}
+                  userAnswer={answer}
+                  onAnswerSelected={() => {}} // 結果表示時は選択できないようにする
+                  showResults={true}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );

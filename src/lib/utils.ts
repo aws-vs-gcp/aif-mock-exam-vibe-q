@@ -4,10 +4,14 @@ import { Question, UserAnswer, QuestionType } from './types';
 export function calculateScore(questions: Question[], userAnswers: UserAnswer[]): number {
   let correctCount = 0;
   
-  userAnswers.forEach(answer => {
-    const question = questions.find(q => q.id === answer.questionId);
-    if (!question) return;
-
+  // 各問題について正解かどうかを確認
+  questions.forEach(question => {
+    const answer = userAnswers.find(a => a.questionId === question.id);
+    
+    if (!answer || !answer.selectedOptionIds || answer.selectedOptionIds.length === 0) {
+      return; // 回答がない場合はスキップ
+    }
+    
     // 単一選択問題の場合
     if (question.type === QuestionType.SINGLE_CHOICE) {
       if (
@@ -37,6 +41,10 @@ export function calculateScore(questions: Question[], userAnswers: UserAnswer[])
 
 // 問題が正解かどうかを判定する
 export function isAnswerCorrect(question: Question, selectedOptionIds: string[]): boolean {
+  if (!selectedOptionIds || selectedOptionIds.length === 0) {
+    return false; // 選択がない場合は不正解
+  }
+  
   if (question.type === QuestionType.SINGLE_CHOICE) {
     return (
       selectedOptionIds.length === 1 && 
