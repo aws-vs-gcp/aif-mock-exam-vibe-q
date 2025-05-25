@@ -2,15 +2,15 @@
 title: "Amazon Forecast の主な機能"
 options:
   - id: "A"
-    text: "リアルタイムのビデオ分析"
+    text: "Amazon Rekognition Video"
   - id: "B"
-    text: "時系列データの予測"
+    text: "Amazon Forecast"
   - id: "C"
-    text: "3Dモデリングとシミュレーション"
+    text: "AWS SimSpace Weaver"
   - id: "D"
-    text: "分散型ブロックチェーン台帳"
+    text: "Amazon Managed Blockchain"
 correctAnswers: ["B"]
-explanation: "Amazon Forecastは、機械学習を使用して時系列データの高精度な予測を生成するフルマネージドサービスです。小売業の需要予測、リソース計画、財務計画、製造計画などのユースケースに適しています。リアルタイムのビデオ分析はAmazon Rekognition Video、3DモデリングとシミュレーションはサードパーティツールやAWS SimSpace Weaver、分散型ブロックチェーン台帳はAmazon Managed Blockchainの機能です。"
+explanation: "Amazon Forecastは、機械学習を使用して時系列データの高精度な予測を生成するフルマネージドサービスです。小売業の需要予測、リソース計画、財務計画、製造計画などのユースケースに適しています。Amazon Rekognition Videoはリアルタイムのビデオ分析、AWS SimSpace Weaverは3Dモデリングとシミュレーション、Amazon Managed Blockchainは分散型ブロックチェーン台帳の機能を提供します。"
 type: "SINGLE_CHOICE"
 ---
 

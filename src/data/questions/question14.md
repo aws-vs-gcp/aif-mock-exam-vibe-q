@@ -2,15 +2,15 @@
 title: "Amazon Personalize の主な機能"
 options:
   - id: "A"
-    text: "ビジネスインテリジェンスと可視化"
+    text: "Amazon QuickSight"
   - id: "B"
-    text: "パーソナライズされたレコメンデーション"
+    text: "Amazon Personalize"
   - id: "C"
-    text: "分散データベース管理"
+    text: "Amazon DynamoDB"
   - id: "D"
-    text: "サーバーレスコンピューティング"
+    text: "AWS Lambda"
 correctAnswers: ["B"]
-explanation: "Amazon Personalizeは、機械学習を使用してパーソナライズされたレコメンデーションを生成するフルマネージドサービスです。ユーザーの行動、アイテムの属性、人口統計データなどに基づいて、リアルタイムのパーソナライズされたレコメンデーションを提供します。ビジネスインテリジェンスと可視化はAmazon QuickSight、分散データベース管理はAmazon DynamoDB、サーバーレスコンピューティングはAWS Lambdaの機能です。"
+explanation: "Amazon Personalizeは、機械学習を使用してパーソナライズされたレコメンデーションを生成するフルマネージドサービスです。ユーザーの行動、アイテムの属性、人口統計データなどに基づいて、リアルタイムのパーソナライズされたレコメンデーションを提供します。Amazon QuickSightはビジネスインテリジェンスと可視化、Amazon DynamoDBは分散データベース管理、AWS Lambdaはサーバーレスコンピューティングの機能を提供します。"
 type: "SINGLE_CHOICE"
 ---
 
