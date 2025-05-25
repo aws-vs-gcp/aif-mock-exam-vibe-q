@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Question, UserAnswer } from '@/lib/types';
+import { Question, UserAnswer, QuestionType } from '@/lib/types';
+import { isAnswerCorrect } from '@/lib/utils';
 
 interface ResultSummaryProps {
   questions: Question[];
@@ -22,6 +23,20 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
       return 'より多くの学習が必要です。基本概念から復習しましょう。';
     }
   };
+
+  // 問題タイプ別の正解数を計算
+  const singleChoiceQuestions = questions.filter(q => q.type === QuestionType.SINGLE_CHOICE);
+  const multipleChoiceQuestions = questions.filter(q => q.type === QuestionType.MULTIPLE_CHOICE);
+  
+  const singleChoiceCorrect = singleChoiceQuestions.filter(question => {
+    const answer = userAnswers.find(a => a.questionId === question.id);
+    return answer && isAnswerCorrect(question, answer.selectedOptionIds);
+  }).length;
+  
+  const multipleChoiceCorrect = multipleChoiceQuestions.filter(question => {
+    const answer = userAnswers.find(a => a.questionId === question.id);
+    return answer && isAnswerCorrect(question, answer.selectedOptionIds);
+  }).length;
   
   return (
     <div className="bg-white p-8 rounded-lg shadow-md">
@@ -31,6 +46,23 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, s
         <div className="text-5xl font-bold mb-2 text-aws-orange">{score} / {questions.length}</div>
         <div className="text-2xl font-semibold">{percentage}%</div>
         <p className="mt-4 text-lg">{getResultMessage()}</p>
+      </div>
+      
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-gray-50 p-4 rounded">
+          <h3 className="font-semibold mb-2">単一選択問題</h3>
+          <p>{singleChoiceCorrect} / {singleChoiceQuestions.length} 正解</p>
+          <p className="text-sm text-gray-600">
+            ({Math.round((singleChoiceCorrect / singleChoiceQuestions.length) * 100) || 0}%)
+          </p>
+        </div>
+        <div className="bg-gray-50 p-4 rounded">
+          <h3 className="font-semibold mb-2">複数選択問題</h3>
+          <p>{multipleChoiceCorrect} / {multipleChoiceQuestions.length} 正解</p>
+          <p className="text-sm text-gray-600">
+            ({Math.round((multipleChoiceCorrect / multipleChoiceQuestions.length) * 100) || 0}%)
+          </p>
+        </div>
       </div>
       
       <div className="flex justify-center mt-8 space-x-4">

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import QuestionCard from '@/components/QuestionCard';
 import ProgressBar from '@/components/ProgressBar';
 import ResultSummary from '@/components/ResultSummary';
-import { Question, UserAnswer } from '@/lib/types';
+import { Question, UserAnswer, QuestionType } from '@/lib/types';
 import { calculateScore } from '@/lib/utils';
 
 // クライアントサイドでの問題データ取得
@@ -29,21 +29,23 @@ async function fetchQuestions(): Promise<Question[]> {
           { id: 'C', text: 'サーバーレスアプリケーションの開発とデプロイ' },
           { id: 'D', text: 'ブロックチェーンネットワークの作成と管理' }
         ],
-        correctAnswer: 'B',
-        explanation: 'AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。'
+        correctAnswers: ['B'],
+        explanation: 'AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。',
+        type: QuestionType.SINGLE_CHOICE
       },
       {
         id: 'question2',
-        title: 'Amazon Rekognitionの機能',
-        content: 'Amazon Rekognitionは主にどのような機能を提供するAIサービスですか？',
+        title: 'Amazon AIサービスの特徴',
+        content: 'Amazon AIサービスの特徴として正しいものを2つ選んでください。',
         options: [
-          { id: 'A', text: 'テキスト翻訳と言語検出' },
-          { id: 'B', text: '音声認識と文字起こし' },
-          { id: 'C', text: '画像と動画の分析と認識' },
-          { id: 'D', text: '自然言語処理と感情分析' }
+          { id: 'A', text: 'すべてのAIサービスは独自のモデルをトレーニングする必要がある' },
+          { id: 'B', text: '事前トレーニング済みのモデルを使用できる' },
+          { id: 'C', text: 'APIを通じて簡単に利用できる' },
+          { id: 'D', text: 'すべてのサービスはオンプレミスでのみ利用可能' }
         ],
-        correctAnswer: 'C',
-        explanation: 'Amazon Rekognitionは、画像と動画の分析と認識のためのAIサービスです。'
+        correctAnswers: ['B', 'C'],
+        explanation: 'Amazon AIサービスは、事前トレーニング済みのモデルを提供し、APIを通じて簡単に利用できるという特徴があります。',
+        type: QuestionType.MULTIPLE_CHOICE
       }
     ];
   }
@@ -72,7 +74,7 @@ export default function ExamPage() {
     loadQuestions();
   }, []);
 
-  const handleAnswerSelected = (questionId: string, optionId: string) => {
+  const handleAnswerSelected = (questionId: string, optionIds: string[]) => {
     const existingAnswerIndex = userAnswers.findIndex(
       (answer) => answer.questionId === questionId
     );
@@ -81,11 +83,11 @@ export default function ExamPage() {
       const updatedAnswers = [...userAnswers];
       updatedAnswers[existingAnswerIndex] = {
         questionId,
-        selectedOptionId: optionId,
+        selectedOptionIds: optionIds,
       };
       setUserAnswers(updatedAnswers);
     } else {
-      setUserAnswers([...userAnswers, { questionId, selectedOptionId: optionId }]);
+      setUserAnswers([...userAnswers, { questionId, selectedOptionIds: optionIds }]);
     }
   };
 
@@ -111,8 +113,37 @@ export default function ExamPage() {
   const currentAnswer = userAnswers.find(
     (answer) => currentQuestion && answer.questionId === currentQuestion.id
   );
-  const answeredQuestionsCount = userAnswers.length;
+  
+  // 回答済みの問題数をカウント
+  const answeredQuestionsCount = userAnswers.filter(answer => {
+    const question = questions.find(q => q.id === answer.questionId);
+    if (!question) return false;
+    
+    // 単一選択問題は1つ選択されていれば回答済み
+    if (question.type === QuestionType.SINGLE_CHOICE) {
+      return answer.selectedOptionIds.length === 1;
+    }
+    // 複数選択問題は2つ選択されていれば回答済み
+    else {
+      return answer.selectedOptionIds.length === 2;
+    }
+  }).length;
+  
   const allQuestionsAnswered = answeredQuestionsCount === questions.length;
+
+  // 現在の問題が回答可能かどうか
+  const isCurrentQuestionAnswerable = () => {
+    if (!currentQuestion) return false;
+    
+    const answer = userAnswers.find(a => a.questionId === currentQuestion.id);
+    if (!answer) return true;
+    
+    if (currentQuestion.type === QuestionType.SINGLE_CHOICE) {
+      return answer.selectedOptionIds.length <= 1;
+    } else {
+      return answer.selectedOptionIds.length <= 2;
+    }
+  };
 
   if (loading) {
     return (
