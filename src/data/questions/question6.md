@@ -1,16 +1,17 @@
 ---
-title: "Amazon Textractの主な機能"
+title: "Amazon Comprehendの機能"
 options:
   - id: "A"
-    text: "音声からテキストへの変換"
+    text: "感情分析"
   - id: "B"
-    text: "ドキュメントからのテキストと構造データの抽出"
+    text: "画像認識"
   - id: "C"
-    text: "テキストの多言語翻訳"
+    text: "エンティティ抽出"
   - id: "D"
-    text: "テキストからの感情分析"
-correctAnswer: "B"
-explanation: "Amazon Textractは、ドキュメントからテキスト、フォーム、テーブルなどの構造化データを自動的に抽出するサービスです。スキャンした請求書、レシート、ID、パスポートなどからデータを抽出し、処理することができます。音声からテキストへの変換はAmazon Transcribe、テキストの多言語翻訳はAmazon Translate、テキストからの感情分析はAmazon Comprehendの機能です。"
+    text: "音声合成"
+correctAnswers: ["A", "C"]
+explanation: "Amazon Comprehendは、自然言語処理（NLP）を使用してテキストからインサイトや関係性を抽出するサービスです。感情分析、エンティティ認識、キーフレーズ検出、言語検出、個人情報（PII）の識別などの機能を提供します。画像認識はAmazon Rekognition、音声合成はAmazon Pollyの機能です。"
+type: "MULTIPLE_CHOICE"
 ---
 
-Amazon Textractの主な機能は何ですか？
+Amazon Comprehendが提供する機能として正しいものを2つ選んでください。

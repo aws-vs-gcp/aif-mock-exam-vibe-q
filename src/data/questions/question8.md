@@ -1,16 +1,17 @@
 ---
-title: "Amazon Transcribeの主な用途"
+title: "Amazon Lexの主な用途"
 options:
   - id: "A"
-    text: "テキストから音声への変換"
+    text: "チャットボットの構築"
   - id: "B"
-    text: "音声からテキストへの変換（音声認識）"
+    text: "画像認識システムの開発"
   - id: "C"
-    text: "画像内のテキスト認識"
+    text: "会話型インターフェースの作成"
   - id: "D"
-    text: "テキストの多言語翻訳"
-correctAnswer: "B"
-explanation: "Amazon Transcribeは、音声をテキストに変換する自動音声認識（ASR）サービスです。音声ファイルや音声ストリームをテキストに変換し、音声コンテンツを検索可能にしたり、字幕を生成したりすることができます。テキストから音声への変換はAmazon Polly、画像内のテキスト認識はAmazon Textract、テキストの多言語翻訳はAmazon Translateの機能です。"
+    text: "ドキュメントからのデータ抽出"
+correctAnswers: ["A", "C"]
+explanation: "Amazon Lexは、チャットボットや会話型インターフェースを構築するためのサービスです。自動音声認識（ASR）と自然言語理解（NLU）の機能を提供し、テキストや音声を理解して意図を認識し、対話を行うアプリケーションを作成できます。画像認識システムの開発はAmazon Rekognition、ドキュメントからのデータ抽出はAmazon Textractの機能です。"
+type: "MULTIPLE_CHOICE"
 ---
 
-Amazon Transcribeの主な用途は何ですか？
+Amazon Lexの主な用途として正しいものを2つ選んでください。

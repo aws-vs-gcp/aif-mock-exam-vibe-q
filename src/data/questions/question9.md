@@ -1,16 +1,17 @@
 ---
-title: "Amazon Lexの主な機能"
+title: "Amazon Pollyの機能"
 options:
   - id: "A"
-    text: "画像認識と物体検出"
+    text: "テキストを自然な音声に変換する"
   - id: "B"
-    text: "チャットボットと会話型インターフェースの構築"
+    text: "画像内のテキストを認識する"
   - id: "C"
-    text: "ドキュメントからのデータ抽出"
+    text: "複数の言語とアクセントをサポートする"
   - id: "D"
-    text: "機械学習モデルのトレーニングとデプロイ"
-correctAnswer: "B"
-explanation: "Amazon Lexは、チャットボットや会話型インターフェースを構築するためのサービスです。自動音声認識（ASR）と自然言語理解（NLU）の機能を提供し、テキストや音声を理解して意図を認識し、対話を行うアプリケーションを作成できます。画像認識と物体検出はAmazon Rekognition、ドキュメントからのデータ抽出はAmazon Textract、機械学習モデルのトレーニングとデプロイはAmazon SageMakerの機能です。"
+    text: "音声からテキストへの変換を行う"
+correctAnswers: ["A", "C"]
+explanation: "Amazon Pollyは、テキストを生きているような音声に変換するサービスです。自然な音声でアプリケーションに話す機能を追加し、新しいカテゴリの音声対応製品を作成することができます。また、複数の言語とアクセントをサポートしています。画像内のテキスト認識はAmazon Textract、音声からテキストへの変換はAmazon Transcribeの機能です。"
+type: "MULTIPLE_CHOICE"
 ---
 
-Amazon Lexの主な機能は何ですか？
+Amazon Pollyの機能として正しいものを2つ選んでください。

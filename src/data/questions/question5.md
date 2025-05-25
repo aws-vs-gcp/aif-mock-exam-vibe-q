@@ -1,16 +1,17 @@
 ---
-title: "Amazon Comprehendの機能"
+title: "Amazon AIサービスの特徴"
 options:
   - id: "A"
-    text: "自然言語処理と文書分析"
+    text: "すべてのAIサービスは独自のモデルをトレーニングする必要がある"
   - id: "B"
-    text: "画像認識と物体検出"
+    text: "事前トレーニング済みのモデルを使用できる"
   - id: "C"
-    text: "音声合成と音声変換"
+    text: "APIを通じて簡単に利用できる"
   - id: "D"
-    text: "機械翻訳と言語検出"
-correctAnswer: "A"
-explanation: "Amazon Comprehendは、自然言語処理（NLP）を使用してテキストからインサイトや関係性を抽出するサービスです。感情分析、エンティティ認識、キーフレーズ検出、言語検出、個人情報（PII）の識別などの機能を提供します。画像認識と物体検出はAmazon Rekognition、音声合成と音声変換はAmazon Polly、機械翻訳はAmazon Translateの主な機能です。"
+    text: "すべてのサービスはオンプレミスでのみ利用可能"
+correctAnswers: ["B", "C"]
+explanation: "Amazon AIサービスは、事前トレーニング済みのモデルを提供し、APIを通じて簡単に利用できるという特徴があります。独自のモデルをトレーニングする必要はなく、クラウド上で利用可能です。"
+type: "MULTIPLE_CHOICE"
 ---
 
-Amazon Comprehendはどのような種類のAIサービスですか？
+Amazon AIサービスの特徴として正しいものを2つ選んでください。
