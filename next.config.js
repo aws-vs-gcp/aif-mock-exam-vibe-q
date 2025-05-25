@@ -6,6 +6,13 @@ const nextConfig = {
   experimental: {
     appDir: false,
   },
+  // GitHub Pagesの設定
+  basePath: process.env.NODE_ENV === 'production' ? '/aif-mock-exam-vibe-q' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/aif-mock-exam-vibe-q/' : '',
+  images: {
+    unoptimized: true,
+  },
+  output: 'export',
 }
 
 module.exports = nextConfig
