@@ -8,6 +8,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // 静的エクスポートの設定
+  output: 'export',
   // srcディレクトリを使用
   distDir: '.next',
 }
