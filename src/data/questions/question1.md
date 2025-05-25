@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "ブロックチェーンネットワークの作成と管理"
 correctAnswers: ["B"]
-explanation: "AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。データサイエンティストやデベロッパーが機械学習モデルを迅速に開発し、本番環境にデプロイするためのツールとインフラストラクチャを提供します。データベース管理はAmazon RDSやDynamoDBの機能、サーバーレスアプリケーション開発はAWS Lambda、ブロックチェーンネットワーク管理はAmazon Managed Blockchainの機能です。"
+explanation: "AWS SageMakerは、機械学習モデルの構築、トレーニング、デプロイのためのフルマネージドサービスです。データサイエンティストやデベロッパーが機械学習モデルを迅速に開発し、本番環境にデプロイするためのツールとインフラストラクチャを提供します。データベース管理はAmazon RDSやDynamoDBの機能、サーバーレスアプリケーション開発はAWS Lambda、ブロックチェーンネットワーク管理はAmazon Managed Blockchainの機能です。\n\n参考: https://aws.amazon.com/jp/sagemaker/"
 type: "SINGLE_CHOICE"
 ---
 

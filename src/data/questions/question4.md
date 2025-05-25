@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "Amazon Comprehend"
 correctAnswers: ["C"]
-explanation: "Amazon Translateは、高品質で費用対効果の高い言語翻訳サービスで、複数言語間のテキスト翻訳を提供します。ウェブサイトやアプリケーションのコンテンツを様々な言語に翻訳するために使用されます。Amazon Textractは画像内のテキスト認識、Amazon Transcribeは音声からテキストへの変換、Amazon Comprehendはテキストからの感情分析の機能を提供します。"
+explanation: "Amazon Translateは、高品質で費用対効果の高い言語翻訳サービスで、複数言語間のテキスト翻訳を提供します。ウェブサイトやアプリケーションのコンテンツを様々な言語に翻訳するために使用されます。Amazon Textractは画像内のテキスト認識、Amazon Transcribeは音声からテキストへの変換、Amazon Comprehendはテキストからの感情分析の機能を提供します。\n\n参考: https://aws.amazon.com/jp/translate/"
 type: "SINGLE_CHOICE"
 ---
 

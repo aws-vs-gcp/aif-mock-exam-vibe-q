@@ -12,7 +12,7 @@ options:
   - id: "E"
     text: "利用するには高度な数学と統計学の知識が必要"
 correctAnswers: ["B", "C"]
-explanation: "Amazon AIサービスは、事前トレーニング済みのモデルを提供し、APIを通じて簡単に利用できるという特徴があります。独自のモデルをトレーニングする必要はなく、クラウド上で利用可能です。また、高度な数学や統計学の知識がなくても利用できるように設計されています。"
+explanation: "Amazon AIサービスは、事前トレーニング済みのモデルを提供し、APIを通じて簡単に利用できるという特徴があります。独自のモデルをトレーニングする必要はなく、クラウド上で利用可能です。また、高度な数学や統計学の知識がなくても利用できるように設計されています。\n\n参考: https://aws.amazon.com/jp/machine-learning/ai-services/"
 type: "MULTIPLE_CHOICE"
 ---
 

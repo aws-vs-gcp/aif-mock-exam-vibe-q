@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "Amazon Comprehend"
 correctAnswers: ["C"]
-explanation: "Amazon Rekognitionは、画像と動画の分析と認識のためのAIサービスです。物体、人物、テキスト、シーン、活動の検出、顔認識、顔比較、不適切なコンテンツの検出などの機能を提供します。Amazon Translateはテキスト翻訳と言語検出、Amazon Transcribeは音声認識と文字起こし、Amazon Comprehendは自然言語処理と感情分析の機能を提供します。"
+explanation: "Amazon Rekognitionは、画像と動画の分析と認識のためのAIサービスです。物体、人物、テキスト、シーン、活動の検出、顔認識、顔比較、不適切なコンテンツの検出などの機能を提供します。Amazon Translateはテキスト翻訳と言語検出、Amazon Transcribeは音声認識と文字起こし、Amazon Comprehendは自然言語処理と感情分析の機能を提供します。\n\n参考: https://aws.amazon.com/jp/rekognition/"
 type: "SINGLE_CHOICE"
 ---
 

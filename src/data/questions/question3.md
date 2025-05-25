@@ -10,7 +10,7 @@ options:
   - id: "D"
     text: "コンテナオーケストレーションサービス"
 correctAnswers: ["B"]
-explanation: "Amazon Bedrockは、Anthropic、AI21 Labs、Stability AI、Amazonなど、複数のプロバイダーの基盤モデル（FM）にアクセスできるフルマネージド型の生成AIサービスです。APIを通じて様々な基盤モデルを利用でき、プライベートデータでモデルをカスタマイズすることも可能です。クラウドネイティブデータベースはAmazon DynamoDBなど、サーバーレスコンピューティングはAWS Lambda、コンテナオーケストレーションはAmazon ECSやEKSの機能です。"
+explanation: "Amazon Bedrockは、Anthropic、AI21 Labs、Stability AI、Amazonなど、複数のプロバイダーの基盤モデル（FM）にアクセスできるフルマネージド型の生成AIサービスです。APIを通じて様々な基盤モデルを利用でき、プライベートデータでモデルをカスタマイズすることも可能です。クラウドネイティブデータベースはAmazon DynamoDBなど、サーバーレスコンピューティングはAWS Lambda、コンテナオーケストレーションはAmazon ECSやEKSの機能です。\n\n参考: https://aws.amazon.com/jp/bedrock/"
 type: "SINGLE_CHOICE"
 ---
 
