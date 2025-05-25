@@ -30,8 +30,13 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         // すでに選択されている場合は選択を解除
         newSelectedOptionIds = selectedOptionIds.filter(id => id !== optionId);
       } else {
-        // 選択されていない場合は追加
-        newSelectedOptionIds = [...selectedOptionIds, optionId];
+        // 選択されていない場合は、すでに2つ選択されていなければ追加
+        if (selectedOptionIds.length < 2) {
+          newSelectedOptionIds = [...selectedOptionIds, optionId];
+        } else {
+          // すでに2つ選択されている場合は何もしない
+          return;
+        }
       }
     } else {
       // 単一選択問題の場合は選択肢を置き換え
@@ -52,6 +57,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       }
     } else if (selectedOptionIds.includes(optionId)) {
       className += ' selected';
+    }
+    
+    // 複数選択問題で、すでに2つ選択されていて、この選択肢が選択されていない場合は無効化
+    if (isMultipleChoice && selectedOptionIds.length >= 2 && !selectedOptionIds.includes(optionId) && !showResults) {
+      className += ' opacity-50 cursor-not-allowed';
     }
     
     return className;
@@ -75,7 +85,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             key={option.id}
             className={getOptionClassName(option.id)}
             onClick={() => handleOptionClick(option.id)}
-            disabled={showResults}
+            disabled={showResults || (isMultipleChoice && selectedOptionIds.length >= 2 && !selectedOptionIds.includes(option.id))}
           >
             <span className="font-medium">{option.id}.</span> {option.text}
           </button>
