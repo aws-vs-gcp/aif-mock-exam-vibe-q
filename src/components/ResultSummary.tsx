@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Question, UserAnswer, QuestionType } from '@/lib/types';
-import { isAnswerCorrect } from '@/lib/utils';
+import { isAnswerCorrect, calculateScore } from '@/lib/utils';
 
 interface ResultSummaryProps {
   questions: Question[];
@@ -9,39 +9,9 @@ interface ResultSummaryProps {
   score: number;
 }
 
-const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, score: initialScore }) => {
-  // 実際のスコアを計算
-  const calculateActualScore = () => {
-    let correctCount = 0;
-    
-    questions.forEach(question => {
-      const answer = userAnswers.find(a => a.questionId === question.id);
-      if (!answer) return;
-      
-      if (question.type === QuestionType.SINGLE_CHOICE) {
-        if (
-          answer.selectedOptionIds.length === 1 && 
-          question.correctAnswers.includes(answer.selectedOptionIds[0])
-        ) {
-          correctCount++;
-        }
-      } else if (question.type === QuestionType.MULTIPLE_CHOICE) {
-        const selectedSet = new Set(answer.selectedOptionIds);
-        const correctSet = new Set(question.correctAnswers);
-        
-        if (
-          selectedSet.size === correctSet.size && 
-          [...selectedSet].every(id => correctSet.has(id))
-        ) {
-          correctCount++;
-        }
-      }
-    });
-    
-    return correctCount;
-  };
-  
-  const actualScore = calculateActualScore();
+const ResultSummary: React.FC<ResultSummaryProps> = ({ questions, userAnswers, score }) => {
+  // utils.tsの共通関数を使用してスコアを計算
+  const actualScore = calculateScore(questions, userAnswers);
   const percentage = Math.round((actualScore / questions.length) * 100);
   
   const getResultMessage = () => {

@@ -25,21 +25,18 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
     let newSelectedOptionIds: string[];
 
     if (isMultipleChoice) {
-      // 複数選択問題の場合
       if (selectedOptionIds.includes(optionId)) {
-        // すでに選択されている場合は選択を解除
+        // 選択済みの場合は選択解除
         newSelectedOptionIds = selectedOptionIds.filter(id => id !== optionId);
+      } else if (selectedOptionIds.length < 2) {
+        // 未選択かつ2つ未満の選択がある場合は追加
+        newSelectedOptionIds = [...selectedOptionIds, optionId];
       } else {
-        // 選択されていない場合は、すでに2つ選択されていなければ追加
-        if (selectedOptionIds.length < 2) {
-          newSelectedOptionIds = [...selectedOptionIds, optionId];
-        } else {
-          // すでに2つ選択されている場合は何もしない
-          return;
-        }
+        // 既に2つ選択されている場合は何もしない
+        return;
       }
     } else {
-      // 単一選択問題の場合は選択肢を置き換え
+      // 単一選択問題の場合
       newSelectedOptionIds = [optionId];
     }
 
@@ -47,24 +44,30 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   const getOptionClassName = (optionId: string) => {
-    let className = 'option-button';
+    const baseClass = 'option-button';
+    const classes = [baseClass];
     
     if (showResults) {
+      // 結果表示モードの場合
       if (question.correctAnswers.includes(optionId)) {
-        className += ' correct';
+        classes.push('correct');
       } else if (selectedOptionIds.includes(optionId)) {
-        className += ' incorrect';
+        classes.push('incorrect');
       }
     } else if (selectedOptionIds.includes(optionId)) {
-      className += ' selected';
+      // 通常モードで選択されている場合
+      classes.push('selected');
     }
     
-    // 複数選択問題で、すでに2つ選択されていて、この選択肢が選択されていない場合は無効化
-    if (isMultipleChoice && selectedOptionIds.length >= 2 && !selectedOptionIds.includes(optionId) && !showResults) {
-      className += ' opacity-50 cursor-not-allowed';
+    // 複数選択問題で選択上限に達している場合の無効化スタイル
+    if (isMultipleChoice && 
+        selectedOptionIds.length >= 2 && 
+        !selectedOptionIds.includes(optionId) && 
+        !showResults) {
+      classes.push('opacity-50 cursor-not-allowed');
     }
     
-    return className;
+    return classes.join(' ');
   };
 
   return (

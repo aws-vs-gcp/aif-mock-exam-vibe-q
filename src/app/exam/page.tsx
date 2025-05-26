@@ -7,8 +7,7 @@ import ResultSummary from '@/components/ResultSummary';
 import { Question, UserAnswer } from '@/lib/types';
 import { calculateScore } from '@/lib/utils';
 
-// クライアントサイドでの問題データ取得のためのダミー関数
-// 実際のデータはAPIルートから取得します
+// APIから問題データを取得する関数
 async function fetchQuestions(): Promise<Question[]> {
   const response = await fetch('/api/questions');
   const data = await response.json();
@@ -39,39 +38,39 @@ export default function ExamPage() {
   }, []);
 
   const handleAnswerSelected = (questionId: string, optionIds: string[]) => {
-    const existingAnswerIndex = userAnswers.findIndex(
-      (answer) => answer.questionId === questionId
-    );
-
-    let updatedAnswers: UserAnswer[];
-    
-    if (existingAnswerIndex !== -1) {
-      updatedAnswers = [...userAnswers];
-      updatedAnswers[existingAnswerIndex] = {
-        questionId,
-        selectedOptionIds: optionIds,
-      };
-    } else {
-      updatedAnswers = [...userAnswers, { questionId, selectedOptionIds: optionIds }];
-    }
-    
-    setUserAnswers(updatedAnswers);
+    setUserAnswers(prevAnswers => {
+      const existingAnswerIndex = prevAnswers.findIndex(
+        answer => answer.questionId === questionId
+      );
+      
+      if (existingAnswerIndex !== -1) {
+        // 既存の回答を更新
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[existingAnswerIndex] = {
+          questionId,
+          selectedOptionIds: optionIds,
+        };
+        return updatedAnswers;
+      } else {
+        // 新しい回答を追加
+        return [...prevAnswers, { questionId, selectedOptionIds: optionIds }];
+      }
+    });
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     }
   };
 
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setCurrentQuestionIndex(prevIndex => prevIndex - 1);
     }
   };
 
   const handleSubmitExam = () => {
-    // 採点する
     const calculatedScore = calculateScore(questions, userAnswers);
     setScore(calculatedScore);
     setExamCompleted(true);
@@ -82,7 +81,7 @@ export default function ExamPage() {
     (answer) => currentQuestion && answer.questionId === currentQuestion.id
   );
   
-  // 実際に回答した問題の数をカウント
+  // 回答済みの問題数と全問回答済みかのフラグを計算
   const answeredQuestionsCount = questions.filter(q => 
     userAnswers.some(a => a.questionId === q.id)
   ).length;

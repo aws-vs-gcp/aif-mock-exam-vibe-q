@@ -4,7 +4,10 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import { Question, QuestionType } from '@/lib/types';
 
-// マークダウンファイルから問題データを読み込む
+/**
+ * マークダウンファイルから問題データを読み込む
+ * @returns 問題データの配列
+ */
 function loadQuestions(): Question[] {
   try {
     const questionsDirectory = path.join(process.cwd(), 'src/data/questions');
@@ -16,10 +19,9 @@ function loadQuestions(): Question[] {
       const { data, content } = matter(fileContents);
       
       // correctAnswersが配列でない場合は配列に変換
-      let correctAnswers = data.correctAnswers || data.correctAnswer;
-      if (!Array.isArray(correctAnswers)) {
-        correctAnswers = [correctAnswers];
-      }
+      const correctAnswers = Array.isArray(data.correctAnswers) 
+        ? data.correctAnswers 
+        : [data.correctAnswers || data.correctAnswer].filter(Boolean);
       
       // Question インターフェースに合わせて修正
       return {
@@ -41,7 +43,10 @@ function loadQuestions(): Question[] {
   }
 }
 
-// ダミーの問題データ
+/**
+ * ダミーの問題データを提供する
+ * @returns ダミー問題の配列
+ */
 function getDummyQuestions(): Question[] {
   return [
     {
@@ -75,7 +80,11 @@ function getDummyQuestions(): Question[] {
   ];
 }
 
-// 問題をランダムに並び替える
+/**
+ * 問題をランダムに並び替える
+ * @param questions 並び替える問題の配列
+ * @returns ランダムに並び替えられた問題の配列
+ */
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffled = [...questions];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -85,15 +94,14 @@ function shuffleQuestions(questions: Question[]): Question[] {
   return shuffled;
 }
 
+/**
+ * 問題データを取得するAPIエンドポイント
+ * @returns ランダムに選ばれた10問の問題データ
+ */
 export async function GET() {
   try {
-    // 問題データを読み込む
     const questions = loadQuestions();
-    
-    // 問題をランダムに並び替える
     const shuffledQuestions = shuffleQuestions(questions);
-    
-    // 最初の10問だけを返す
     const limitedQuestions = shuffledQuestions.slice(0, 10);
     
     return NextResponse.json({ questions: limitedQuestions });
